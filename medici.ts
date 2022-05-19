@@ -93,7 +93,7 @@ const parameters = parse(Deno.args, {
 });
 
 parameters.integrityCommand = `btrfs device stats -c ${parameters.partition}`;
-parameters.displayCommand = `systemctl is-failed --quiet lightdm && cat /var/log/lightdm/lightdm.log | egrep --quiet '\sFailed\s|\sexited\s|\sexiting\s' || exit 1`;
+parameters.displayCommand = `systemctl is-failed --quiet lightdm && journalctl -b0 -xu lightdm | egrep --quiet '\sFailed\s' || exit 1`;
 
 if(parameters._[0] == "run"){
 
