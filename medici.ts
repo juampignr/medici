@@ -51,7 +51,6 @@ async function check(parameters){
     console.log("Integrity: "+JSON.stringify(integrityStatus));
     console.log("Display: "+JSON.stringify(displayManagerStatus));
 
-    /*
     if(integrityStatus.success && displayManagerStatus.success){
         
         console.log(`\nPerforming snapshot from ${parameters.source} to ${parameters.destination}`);
@@ -88,7 +87,6 @@ async function check(parameters){
 
         Deno.exit(1)
     }
-    */
 }
 
 const parameters = parse(Deno.args, {
