@@ -98,7 +98,7 @@ const parameters = parse(Deno.args, {
 });
 
 parameters.integrityCommand = `btrfs device stats -c ${parameters.partition}`;
-parameters.displayCommand = `systemctl is-failed --quiet lightdm && journalctl --no-pager -b0 -xu lightdm | egrep -z '^.*closed.*\n.*closed.*$' || exit 0`;
+parameters.displayCommand = `systemctl is-active --quiet lightdm && journalctl --no-pager -b0 -xu lightdm | egrep -z '^.*closed.*\n.*closed.*$' || exit 1`;
 
 if(parameters._[0] == "run"){
 
