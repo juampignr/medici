@@ -94,10 +94,10 @@ async function check(parameters){
 const parameters = parse(Deno.args, {
   string: ["destination","source","partition",""],
   boolean: ["daily","weekly","monthly"],
-  default: { destination: "/mnt/.snapshots", source: "/", partition:"/dev/mmblk0p2", monthly:true }
+  default: { destination: "/mnt/.snapshots",source: "/", monthly:true }
 });
 
-parameters.integrityCommand = `btrfs device stats -c ${parameters.partition}`;
+parameters.integrityCommand = `btrfs device stats -c ${parameters.source}`;
 parameters.displayCommand = `systemctl is-failed --quiet lightdm && journalctl --no-pager -b0 -xu lightdm | egrep -z '^.*closed.*\n.*closed.*$' || exit 0`;
 
 if(parameters._[0] == "run"){
