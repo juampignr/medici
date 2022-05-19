@@ -48,8 +48,8 @@ async function check(parameters){
     integrityProcess.close();
     displayManagerProcess.close();
     
-    console.log("Integrity: "+integrityStatus);
-    console.log("Display: "+displayManagerStatus);
+    console.log("Integrity: "+JSON.stringify(integrityStatus));
+    console.log("Display: "+JSON.stringify(displayManagerStatus));
 
     /*
     if(integrityStatus.success && displayManagerStatus.success){
