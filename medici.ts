@@ -47,7 +47,11 @@ async function check(parameters){
 
     integrityProcess.close();
     displayManagerProcess.close();
+    
+    console.log("Integrity: "+integrityStatus);
+    console.log("Display: "+displayManagerStatus);
 
+    /*
     if(integrityStatus.success && displayManagerStatus.success){
         
         console.log(`\nPerforming snapshot from ${parameters.source} to ${parameters.destination}`);
@@ -84,6 +88,7 @@ async function check(parameters){
 
         Deno.exit(1)
     }
+    */
 }
 
 const parameters = parse(Deno.args, {
@@ -93,7 +98,7 @@ const parameters = parse(Deno.args, {
 });
 
 parameters.integrityCommand = `btrfs device stats -c ${parameters.partition}`;
-parameters.displayCommand = `systemctl is-failed --quiet lightdm && journalctl -b0 -xu lightdm | egrep --quiet '\sFailed\s' || exit 1`;
+parameters.displayCommand = `systemctl is-failed --quiet lightdm && journalctl --no-pager -b0 -xu lightdm | egrep -z '^.*closed.*\n.*closed.*$' || exit 0`;
 
 if(parameters._[0] == "run"){
 
